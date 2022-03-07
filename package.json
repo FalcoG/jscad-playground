@@ -1,0 +1,26 @@
+{
+  "name": "jscad-playground",
+  "version": "1.0.0",
+  "description": "Experimentation with OpenJSCAD",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx jscad -v",
+    "build": "mkdir -p dist/ && npx jscad src/index.js -o dist/test.stl"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FalcoG/jscad-playground.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FalcoG/jscad-playground/issues"
+  },
+  "homepage": "https://github.com/FalcoG/jscad-playground#readme",
+  "devDependencies": {
+    "@jscad/cli": "^2.2.15"
+  },
+  "dependencies": {
+    "@jscad/modeling": "^2.8.0"
+  }
+}
