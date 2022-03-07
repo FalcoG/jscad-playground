@@ -4,8 +4,10 @@
   "description": "Experimentation with OpenJSCAD",
   "main": "index.js",
   "scripts": {
-    "test": "npx jscad -v",
-    "build": "mkdir -p dist/ && npx jscad src/index.js -o dist/test.stl"
+    "build:tsc": "npx tsc src/index.ts --outDir dist/",
+    "build:jscad": "mkdir -p dist/ && npx jscad dist/index.js -o dist/test.stl",
+    "build": "npm run build:tsc && npm run build:jscad",
+    "test": "npx jscad -v"
   },
   "repository": {
     "type": "git",
@@ -18,7 +20,9 @@
   },
   "homepage": "https://github.com/FalcoG/jscad-playground#readme",
   "devDependencies": {
-    "@jscad/cli": "^2.2.15"
+    "@jscad/cli": "^2.2.15",
+    "@tsconfig/recommended": "^1.0.1",
+    "typescript": "^4.6.2"
   },
   "dependencies": {
     "@jscad/modeling": "^2.8.0"
