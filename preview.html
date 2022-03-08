@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSCAD Playground Preview</title>
+    <style>
+        body { margin: 0; }
+    </style>
+</head>
+<body>
+
+<script type="module">
+    import * as THREE from './node_modules/three/build/three.module.js';
+    import { OBJLoader } from './node_modules/three/examples/jsm/loaders/OBJLoader.js';
+    import { OrbitControls } from './node_modules/three/examples/jsm/controls/OrbitControls.js'
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    scene.add(new THREE.AxesHelper(5))
+
+    scene.background = new THREE.Color(0x333333);
+
+    const renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+
+    camera.position.add(new THREE.Vector3(20, 20, 20))
+
+    const controls = new OrbitControls(camera, renderer.domElement)
+    controls.enableDamping = true
+
+    // instantiate a loader
+    const loader = new OBJLoader();
+
+    loader.load(
+        'dist/test.obj',
+        (object) => {
+            const material = new THREE.MeshNormalMaterial({ flatShading: true })
+
+            object.traverse((child) => {
+                if (child instanceof THREE.Mesh) {
+                    child.material = material;
+                }
+            });
+
+            scene.add(object);
+            camera.lookAt(object)
+
+            console.log('Object added')
+        },
+        // called when loading is in progresses
+        (xhr) => {
+            console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+        },
+        // called when loading has errors
+        (error) => {
+            console.log('An error happened', error);
+        }
+    );
+
+    function animate() {
+        requestAnimationFrame(animate);
+
+        controls.update()
+
+        renderer.render(scene, camera);
+    }
+    animate();
+</script>
+</body>
+</html>
