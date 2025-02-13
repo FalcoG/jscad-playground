@@ -1,8 +1,9 @@
 import { primitives, extrusions, utils } from '@jscad/modeling'
 import { Geom3 } from '@jscad/modeling/src/geometries/types'
+import { Vec3 } from '@jscad/modeling/src/maths/types'
 
 const main = (): Geom3 | Geom3[] => {
-  const deviceDimensions: [number, number, number] = [34.93, 24.07, 1.55]
+  const deviceDimensions: Vec3 = [34.93, 24.07, 1.55]
   const deviceScreenAngle = 120
   const tilt = 35
 
